@@ -9,13 +9,13 @@ pipeline {
 
     stages {
         stage('Deploy Package') {
-            steps {
-                bat """
-                xcopy /E /Y "%WORKSPACE%\\*" "${IS_PACKAGES}\\%PACKAGE%\\"
-                """
-            }
-        }
-
+    steps {
+        sh '''
+            cd /path/to/your/package
+            ./deploycommand.sh
+        '''
+    }
+}
         stage('Reload Package') {
             steps {
                 bat """
