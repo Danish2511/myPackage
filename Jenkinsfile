@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SAG_HOME = "C:\\SoftwareAG"
-        PACKAGE = "myDemoPackage"
+        PACKAGE = "myPackage"
         IS_PACKAGES = "${SAG_HOME}\\IntegrationServer\\instances\\default\\packages"
     }
 
@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Deploying package..."
-                    cp -r myDemoPackage "$IS_PACKAGES"
+                    cp -r myPackage "$IS_PACKAGES"
                 '''
             }
         }
@@ -21,7 +21,7 @@ pipeline {
                 // Replace this with a Unix-style curl command since you're using `sh` not `bat`
                 sh '''
                     echo "Reloading package..."
-                    curl -u Administrator:manage -X POST "http://host.docker.internal:5555/invoke/wm.server.packages:reload?package=myDemoPackage"
+                    curl -u Administrator:manage -X POST "http://host.docker.internal:5555/invoke/wm.server.packages:reload?package=myPackage"
                 '''
             }
         }
