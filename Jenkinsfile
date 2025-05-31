@@ -9,18 +9,20 @@ pipeline {
 
     stages {
         stage('Deploy Package') {
-    steps {
-        sh '''
-            cd /path/to/your/package
-            ./deploycommand.sh
-        '''
-    }
-}
+            steps {
+                sh '''
+                    echo "Deploying package..."
+                    cp -r myDemoPackage "$IS_PACKAGES"
+                '''
+            }
+        }
         stage('Reload Package') {
             steps {
-                bat """
-                curl -u Administrator:manage -X POST "http://localhost:5555/invoke/wm.server.packages:reload?package=%PACKAGE%"
-                """
+                // Replace this with a Unix-style curl command since you're using `sh` not `bat`
+                sh '''
+                    echo "Reloading package..."
+                    curl -u Administrator:manage -X POST "http://host.docker.internal:5555/invoke/wm.server.packages:reload?package=myDemoPackage"
+                '''
             }
         }
     }
