@@ -2,9 +2,8 @@ pipeline {
     agent any
 
     environment {
-        SAG_HOME = "C:\\SoftwareAG"
         PACKAGE = "myPackage"
-        IS_PACKAGES = "${SAG_HOME}\\IntegrationServer\\instances\\default\\packages"
+        IS_PACKAGES = "/opt/sag-packages" // Path inside container
     }
 
     stages {
@@ -16,9 +15,9 @@ pipeline {
                 '''
             }
         }
+
         stage('Reload Package') {
             steps {
-                // Replace this with a Unix-style curl command since you're using `sh` not `bat`
                 sh '''
                     echo "Reloading package..."
                     curl -u Administrator:manage -X POST "http://host.docker.internal:5555/invoke/wm.server.packages:reload?package=myPackage"
