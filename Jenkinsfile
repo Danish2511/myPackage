@@ -8,12 +8,6 @@ pipeline {
     }
 
     stages {
-        stage('Clone Repo') {
-            steps {
-                git 'https://github.com/Danish2511/myPackage.git'
-            }
-        }
-
         stage('Deploy Package') {
             steps {
                 bat """
