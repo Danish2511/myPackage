@@ -7,6 +7,12 @@ pipeline {
     }
 
     stages {
+        stage('List Workspace') {
+    steps {
+        sh 'ls -l'
+    }
+}
+
         stage('Deploy Package') {
             steps {
                 sh '''
